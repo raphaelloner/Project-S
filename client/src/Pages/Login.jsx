@@ -17,10 +17,8 @@ const Login = () => {
             .then(res => res.json())
             .then(login => {
                 localStorage.setItem("jwt", login.token);
-            }).then(() => {
-                setIsLoggedIn(true);
-                navigate("/posts");
-            })
+            }).then(() => setIsLoggedIn(true))
+            .then(() => navigate("/posts"));
 
     }
 

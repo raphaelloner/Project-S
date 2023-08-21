@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { AuthContext } from "../../components/AuthContext/AuthContextProvider";
+import NavButton from "./NavButton";
 
 function logout() {
     localStorage.removeItem("jwt");
@@ -9,14 +10,16 @@ function logout() {
 const Layout = () => {
     const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
     return (
-        <div>
+        <div class="bg-slate-500">
             <p>Project - S</p>
             {!isLoggedIn
-                ? <Link to="/login"> <button type="button" >Login</button></Link>
+                ?
+                <NavButton link="/login" name="Login" />
+
                 : <>
-                    <Link to="/login"> <button onClick={() => { logout(); setIsLoggedIn(false); }} >Logout</button></Link>
-                    <Link to="/posts"><button type="button">All Posts</button></Link>
-                    <Link to="/create"><button type="button">Create Post</button></Link>
+                    <NavButton link={"/login"} name="Logout" onClick={() => { logout(); setIsLoggedIn(false); }} />
+                    <NavButton link={"/posts"} name={"Posts"} />
+                    <NavButton link={"/create"} name={"Create"} />
                 </>
             }
 
