@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Layout from './Pages/Layout';
+import Layout from './Pages/Navbar/Navbar'
 import ErrorPage from './Pages/ErrorPage.jsx';
 import PostList from './Pages/PostList.jsx';
 import PostCreator from './Pages/PostCreator.jsx';
@@ -20,7 +20,7 @@ const App = () => {
             errorElement: <ErrorPage />,
             children: [
                 {
-                    path: '/',
+                    path: '/landing',
                     element: <LandingPage />,
                 },
                 {

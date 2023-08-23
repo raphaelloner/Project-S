@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import LoginForm from "../components/LoginForm";
+import LoginForm from "../components/LoginForm/LoginForm";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../components/AuthContext/AuthContextProvider';
 
@@ -15,13 +15,10 @@ const Login = () => {
             body: JSON.stringify(loginData)
         })
             .then(res => res.json())
-            .then(login => {
-                localStorage.setItem("jwt", login.token);
-            }).then(() => setIsLoggedIn(true))
+            .then(login => localStorage.setItem("jwt", login.token)).then(() => setIsLoggedIn(true))
             .then(() => navigate("/posts"));
 
     }
-
 
     return (
         <LoginForm
