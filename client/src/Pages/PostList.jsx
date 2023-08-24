@@ -34,7 +34,7 @@ const PostList = () => {
 
 
         return () => controller.abort();
-    }, [data])
+    }, [loading])
 
     if (loading) {
         return <Loading />

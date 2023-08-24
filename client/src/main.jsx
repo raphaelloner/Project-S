@@ -29,13 +29,13 @@ const App = () => {
                 },
                 {
                     path: '/create',
-                    element: localStorage.getItem("jwt") !== null ? <PostCreator /> : <NoAuthorityPage />,
+                    element: <PostCreator /> //localStorage.getItem("jwt") !== null ? <PostCreator /> : <NoAuthorityPage />,
 
                 },
 
                 {
                     path: '/posts',
-                    element: localStorage.getItem("jwt") !== null ? <PostList /> : <NoAuthorityPage />,
+                    element: <PostList />,//localStorage.getItem("jwt") !== null ? <PostList /> : <NoAuthorityPage />
                 },
             ],
         },
