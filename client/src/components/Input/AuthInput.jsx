@@ -1,6 +1,6 @@
 
 
-const FormInput = ({ name, label, placeholder }) => {
+const AuthInput = ({ name, label, placeholder }) => {
 
 
     return (
@@ -12,4 +12,4 @@ const FormInput = ({ name, label, placeholder }) => {
 
 
 }
-export default FormInput;
+export default AuthInput;

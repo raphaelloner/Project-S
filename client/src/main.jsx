@@ -10,6 +10,7 @@ import Login from './Pages/Login.jsx';
 import AuthProvider from './components/AuthContext/AuthContextProvider';
 import LandingPage from './Pages/Landing';
 import NoAuthorityPage from './Pages/NoAuthorityPage';
+import Register from './Pages/Register';
 
 const App = () => {
 
@@ -26,6 +27,9 @@ const App = () => {
                 {
                     path: '/login',
                     element: <Login />,
+                }, {
+                    path: '/register',
+                    element: <Register />,
                 },
                 {
                     path: '/create',

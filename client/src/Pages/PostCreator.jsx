@@ -19,23 +19,19 @@ const PostCreator = () => {
         setLoading(true);
 
         createPost(post)
-            .then(() => {
-                navigate("/posts");
-            })
+
             .catch((err) => {
                 console.log("catch error: " + err);
                 throw err;
             })
             .finally(() => {
                 setLoading(false);
+                navigate("/posts");
             });
     }
 
     return (
-        <PostForm
-            disabled={loading}
-            onCancel={() => navigate("/")}
-            onSave={handleCreatePost}
+        <PostForm disabled={loading} onCancel={() => navigate("/")} onSave={handleCreatePost}
         />
     )
 }

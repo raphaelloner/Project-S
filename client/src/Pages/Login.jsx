@@ -8,7 +8,7 @@ import { AuthContext } from '../components/AuthContext/AuthContextProvider';
 const Login = () => {
     const navigate = new useNavigate();
     const { setIsLoggedIn } = useContext(AuthContext);
-    const handleLogin = (loginData) => {
+    const handleLogin = async (loginData) => {
         return fetch("http://localhost:8080/api/v1/auth/authenticate", {
             method: "POST",
             headers: { "Content-Type": "application/json" },

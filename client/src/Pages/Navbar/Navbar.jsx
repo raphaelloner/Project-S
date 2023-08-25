@@ -27,18 +27,18 @@ const Layout = () => {
                         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Notice</span>
                     </a>
                     <div className="flex md:order-2">
-                        {isLoggedIn
-                            ? <NavButton link={"/login"} name={"logout"} onClick={() => { logout() }} />
-                            : <> <NavLink link={"/login"} name={"login"} />
-                                <NavLink link={"/register"} name={"register"} />
-                            </>}
+                        {isLoggedIn && <NavButton link={"/login"} name={"Logout"} onClick={() => { logout() }} />}
                     </div>
                     <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                         <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                            {isLoggedIn && <>
+                            {isLoggedIn ? <>
                                 <NavLink link={"/posts"} name={"Posts"} />
                                 <NavLink link={"/create"} name={"Notice"} />
-                            </>}
+                            </> : <>
+                                <NavLink link={"/login"} name={"Sign in"} />
+                                <NavLink link={"/register"} name={"Register"} />
+                            </>
+                            }
                         </ul>
                     </div>
                 </div>
