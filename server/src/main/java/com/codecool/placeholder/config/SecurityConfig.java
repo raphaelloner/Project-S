@@ -15,6 +15,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -33,6 +34,7 @@ public class SecurityConfig {
         )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .httpBasic(withDefaults());
+
         return http.build();
     }
 

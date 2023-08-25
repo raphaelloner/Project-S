@@ -1,8 +1,10 @@
 package com.codecool.placeholder.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name="posts")
@@ -11,6 +13,10 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
     private Long id;
+    @ManyToOne
+    @JoinColumn(name = "parent_post_id")
+    private Post parentPost;
+
     @Column(name = "user_name")
     private String username;
     @Column(name="post_time")
@@ -19,25 +25,40 @@ public class Post {
     private LocalDateTime lastUpdated;
     @Column(name = "content")
     private String content;
-//
-    public Post(Long id, String username, LocalDateTime postTime, LocalDateTime lastUpdated, String content) {
+    @OneToMany(mappedBy = "parentPost", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private List<Post> answers;
+
+    public Post(Long id, Post parentPost, String username, LocalDateTime postTime, LocalDateTime lastUpdated, String content, List<Post> answers) {
         this.id = id;
+        this.parentPost = parentPost;
         this.username = username;
         this.postTime = postTime;
         this.lastUpdated = lastUpdated;
         this.content = content;
+        this.answers = answers;
     }
+
     public Post() {
      this.postTime = LocalDateTime.now();
      this.lastUpdated = LocalDateTime.now();
     }
+    public List<Post> getAnswers() {return answers;}
 
+    public void setAnswers(List<Post> answers) {this.answers = answers;}
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Post getParentPost() {
+        return parentPost;
+    }
+
+    public void setParentPost(Post parentPost) {
+        this.parentPost = parentPost;
     }
 
     public String getUsername() {
