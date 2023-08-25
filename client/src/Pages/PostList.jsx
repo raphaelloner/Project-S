@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Posts from "../components/Posts";
-import Loading from "../components/Loading";
+import Posts from "../components/Posts/Posts";
+import Loading from "../components/Loading/Loading";
 
 
 
@@ -34,7 +34,7 @@ const PostList = () => {
 
 
         return () => controller.abort();
-    }, [])
+    }, [loading])
 
     if (loading) {
         return <Loading />

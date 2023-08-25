@@ -1,5 +1,5 @@
 import "./Loading.css";
 
-const Loading = () => <div className="Loading" />;
+const Loading = () => <div style={{ paddingTop: "250px" }}><div className="Loading" /></div>;
 
 export default Loading;

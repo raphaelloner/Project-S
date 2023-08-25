@@ -3,7 +3,7 @@ import React, { useState, createContext } from 'react';
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("jwt") !== null ? false : true);
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>

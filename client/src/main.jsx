@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Layout from './Pages/Layout';
+import Layout from './Pages/Navbar/Navbar'
 import ErrorPage from './Pages/ErrorPage.jsx';
 import PostList from './Pages/PostList.jsx';
 import PostCreator from './Pages/PostCreator.jsx';
@@ -10,6 +10,7 @@ import Login from './Pages/Login.jsx';
 import AuthProvider from './components/AuthContext/AuthContextProvider';
 import LandingPage from './Pages/Landing';
 import NoAuthorityPage from './Pages/NoAuthorityPage';
+import Register from './Pages/Register';
 
 const App = () => {
 
@@ -20,22 +21,25 @@ const App = () => {
             errorElement: <ErrorPage />,
             children: [
                 {
-                    path: '/',
+                    path: '/landing',
                     element: <LandingPage />,
                 },
                 {
                     path: '/login',
                     element: <Login />,
+                }, {
+                    path: '/register',
+                    element: <Register />,
                 },
                 {
                     path: '/create',
-                    element: localStorage.getItem("jwt") !== null ? <PostCreator /> : <NoAuthorityPage />,
+                    element: <PostCreator /> //localStorage.getItem("jwt") !== null ? <PostCreator /> : <NoAuthorityPage />,
 
                 },
 
                 {
                     path: '/posts',
-                    element: localStorage.getItem("jwt") !== null ? <PostList /> : <NoAuthorityPage />,
+                    element: <PostList />,//localStorage.getItem("jwt") !== null ? <PostList /> : <NoAuthorityPage />
                 },
             ],
         },
