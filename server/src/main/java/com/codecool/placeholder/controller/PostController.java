@@ -23,12 +23,17 @@ private final UserRepository userRepository;
     }
 
     @GetMapping
-    public List<Post> findAllPost(){return postService.findAllPost();
-    }
+    public List<Post> findAllPost(){return postService.findAllPost();}
 
     @GetMapping("/{id}")
     public Optional<Post> findPostById(@PathVariable Long id){
         return postService.findPostById(id);
+    }
+    @GetMapping("/answers/{id}")
+    public List<Post> findAllAnswersByPostId(@PathVariable Long id){
+        Post post = postService.findPostById(id).orElseThrow();
+
+        return post.getAnswers();
     }
 
     @PostMapping
