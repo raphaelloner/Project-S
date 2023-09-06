@@ -7,6 +7,8 @@ import com.codecool.placeholder.service.PostService;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,18 +31,13 @@ private final UserRepository userRepository;
     public Optional<Post> findPostById(@PathVariable Long id){
         return postService.findPostById(id);
     }
-    @GetMapping("/answers/{id}")
-    public List<Post> findAllAnswersByPostId(@PathVariable Long id){
-        Post post = postService.findPostById(id).orElseThrow();
-
-        return post.getAnswers();
-    }
 
     @PostMapping
-    public Post savePost(@RequestBody Post post, Authentication authentication){
+    public Optional<Post> savePost(@RequestBody Post post, Authentication authentication){
         User user = userRepository.findByEmail(authentication.getName()).orElseThrow();
+        post.setOwner(user);
         post.setUsername(user.getFirstName() + ' ' + user.getLastName());
-        return postService.savePost(post);
+        return Optional.of(postService.savePost(post)) ;
     }
 
     @PutMapping
@@ -53,7 +50,16 @@ private final UserRepository userRepository;
         postService.deletePost(id);
 
     }
+    @GetMapping("/answers/{id}")
+    public List<Post> findAllAnswersByPostId(@PathVariable Long id){
+        Post post = postService.findPostById(id).orElseThrow();
+        List<Post> copy = new ArrayList<>(post.getAnswers());
+        Collections.reverse(copy);
+        return copy;
+    }
+    @PostMapping("/answers/{id}")
+    public Post  saveAnswer(@RequestBody Post answer,@PathVariable Long id,Authentication authentication){
 
-
-
+        return  postService.saveAnswer(answer,id,authentication.getName());
+    }
 }

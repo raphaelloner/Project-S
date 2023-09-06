@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,8 +16,12 @@ public class Post {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "parent_post_id")
+    @JsonIgnore
     private Post parentPost;
-
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User owner;
     @Column(name = "user_name")
     private String username;
     @Column(name="post_time")
@@ -28,20 +33,32 @@ public class Post {
     @OneToMany(mappedBy = "parentPost", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Post> answers;
 
-    public Post(Long id, Post parentPost, String username, LocalDateTime postTime, LocalDateTime lastUpdated, String content, List<Post> answers) {
+    public Post(Long id, Post parentPost, String username, LocalDateTime postTime, LocalDateTime lastUpdated, String content,User owner) {
         this.id = id;
         this.parentPost = parentPost;
         this.username = username;
         this.postTime = postTime;
         this.lastUpdated = lastUpdated;
         this.content = content;
-        this.answers = answers;
+        this.answers = new ArrayList<>();
+        this.owner = owner;
     }
 
     public Post() {
      this.postTime = LocalDateTime.now();
      this.lastUpdated = LocalDateTime.now();
     }
+    public List<Post> addAnswers(Post post){
+        answers.add(post);
+        return answers;
+    }public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
     public List<Post> getAnswers() {return answers;}
 
     public void setAnswers(List<Post> answers) {this.answers = answers;}
