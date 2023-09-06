@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Posts from "../components/Posts/Posts";
+import PostList from "../components/Posts/PostList";
 import Loading from "../components/Loading/Loading";
 
 
@@ -11,7 +11,8 @@ const fetchPosts = (signal) => {
     }).then(res => res.json());
 }
 
-const PostList = () => {
+const Posts = () => {
+
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState(null);
 
@@ -31,10 +32,8 @@ const PostList = () => {
                     throw error;
                 }
             })
-
-
         return () => controller.abort();
-    }, [loading])
+    }, [loading]);
 
     if (loading) {
         return <Loading />
@@ -42,9 +41,9 @@ const PostList = () => {
 
     return (
         <>
-            <Posts posts={data} />
+            <PostList posts={data} />
         </>
     )
 }
 
-export default PostList;
+export default Posts;

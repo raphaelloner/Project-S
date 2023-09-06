@@ -1,18 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, useParams } from 'react-router-dom';
 import Layout from './Pages/Navbar/Navbar'
 import ErrorPage from './Pages/ErrorPage.jsx';
-import PostList from './Pages/PostList.jsx';
+import Posts from './Pages/Posts.jsx';
 import PostCreator from './Pages/PostCreator.jsx';
 import Login from './Pages/Login.jsx';
 import AuthProvider from './components/AuthContext/AuthContextProvider';
 import LandingPage from './Pages/Landing';
 import NoAuthorityPage from './Pages/NoAuthorityPage';
 import Register from './Pages/Register';
+import Answers from './Pages/Answers';
 
 const App = () => {
+    const params = useParams();
+    console.log(params)
 
     const router = createBrowserRouter([
         {
@@ -27,7 +30,8 @@ const App = () => {
                 {
                     path: '/login',
                     element: <Login />,
-                }, {
+                },
+                {
                     path: '/register',
                     element: <Register />,
                 },
@@ -36,10 +40,13 @@ const App = () => {
                     element: <PostCreator /> //localStorage.getItem("jwt") !== null ? <PostCreator /> : <NoAuthorityPage />,
 
                 },
-
                 {
                     path: '/posts',
-                    element: <PostList />,//localStorage.getItem("jwt") !== null ? <PostList /> : <NoAuthorityPage />
+                    element: <Posts />,//localStorage.getItem("jwt") !== null ? <PostList /> : <NoAuthorityPage />
+                },
+                {
+                    path: '/answers/:id',
+                    element: <Answers />,
                 },
             ],
         },

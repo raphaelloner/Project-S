@@ -37,7 +37,7 @@ const Layout = () => {
                                 <NavLink link={"/posts"} name={"Posts"} />
                                 <NavLink link={"/create"} name={"Notice"} />
                             </> : <>
-                                {location.pathname !== "/login" && <NavLink link={"/login"} name={"Sign in"} />}
+                                {location.pathname !== "/login" && <NavLink link={"/login"} name={"Log in"} />}
                                 {location.pathname !== "/register" && <NavLink link={"/register"} name={"Register"} />}
                             </>
                             }
