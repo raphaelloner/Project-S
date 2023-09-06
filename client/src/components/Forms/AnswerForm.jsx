@@ -1,9 +1,10 @@
 import React from 'react';
 import BasicForm from './BasicForm';
 import SubmitButton from './FormComponents/ButtonSubmit';
+import BasicAnswerForm from './BasicAnswerForm';
 
 
-const PostForm = ({ disabled, onCancel, onSave }) => {
+const AnswerForm = ({ disabled, onCancel, onSave }) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -27,9 +28,9 @@ const PostForm = ({ disabled, onCancel, onSave }) => {
 
     return (
         <>
-            <BasicForm children={children} onSubmit={onSubmit} titel={"Your Message"} />
+            <BasicAnswerForm children={children} onSubmit={onSubmit} titel={"Your answer"} />
         </>
     )
 }
 
-export default PostForm;
+export default AnswerForm;

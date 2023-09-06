@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { AuthContext } from "../../components/AuthContext/AuthContextProvider";
 import NavLink from "./NavLink";
 import NavButton from "./NavButton";
@@ -8,7 +8,9 @@ import NavButton from "./NavButton";
 const Layout = () => {
 
     const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+    const location = useLocation();
     useEffect(() => {
+        console.log(location.pathname)
         setIsLoggedIn(localStorage.getItem("jwt") === null ? false : true);
     }, [isLoggedIn])
 
@@ -35,8 +37,8 @@ const Layout = () => {
                                 <NavLink link={"/posts"} name={"Posts"} />
                                 <NavLink link={"/create"} name={"Notice"} />
                             </> : <>
-                                <NavLink link={"/login"} name={"Sign in"} />
-                                <NavLink link={"/register"} name={"Register"} />
+                                {location.pathname !== "/login" && <NavLink link={"/login"} name={"Log in"} />}
+                                {location.pathname !== "/register" && <NavLink link={"/register"} name={"Register"} />}
                             </>
                             }
                         </ul>
